@@ -1,7 +1,8 @@
 <script>
     // @hmr:keep-all
     import { globalOnDemandP5 } from '$lib/global-on-demand-p5.js'
-    globalOnDemandP5({setup, draw});
+    globalOnDemandP5({setup, draw}, 'p5-sketch');
+
 
     // Top level variables are preserved by Svelte.
     let x;
@@ -17,3 +18,5 @@
         line(x, 0, x, height);
     }
 </script>
+
+<div id=p5-sketch />

@@ -1,6 +1,6 @@
 import { onMount } from 'svelte';
 
-export function globalOnDemandP5(methods) {
+export function globalOnDemandP5(methods, parent) {
     onMount(async function(){
         const { default: p5 } = await import('p5');
 
@@ -12,7 +12,7 @@ export function globalOnDemandP5(methods) {
         }
 
         // (Re)start P5.js in on-demand global mode.
-        new p5();
+        new p5(null, parent);
     });
 }
 
