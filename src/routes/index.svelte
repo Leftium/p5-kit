@@ -43,14 +43,16 @@
             handleMousemove(e);
         }
         if (e.altKey) {
-            mouseMode = 'wander';
+            mouseMode = (mouseMode == 'wander' ? 'control' : 'wander');
         }
     }
 
+    let t = 0;
     function step(ts) {
         if (mouseMode == 'wander') {
-            mouseX = (Math.cos(ts/1009)+1)/2 * maxMouseX;
-            mouseY = (Math.sin(ts/1549)+1)/2 * (maxMouseY-4);
+            t += 10;
+            mouseX = (Math.cos(t/1009)+1)/2 * maxMouseX;
+            mouseY = (Math.sin(t/1549)+1)/2 * (maxMouseY-4);
         }
         requestAnimationFrame(step);
     }
