@@ -1,15 +1,4 @@
 <script>
-    // @hmr:keep-all
-    import { globalOnDemandP5 } from '$lib/global-on-demand-p5.js';
-    globalOnDemandP5({ setup, draw }, 'p5-sketch');
-
-    let sketch;
-
-    let mouseMode = 'wander'; // 'control', 'follow'
-
-    let mouseX, maxMouseX;
-    let mouseY, maxMouseY;
-
     let max_distance;
 
     function setup() {
@@ -28,6 +17,22 @@
             }
         }
     }
+
+
+
+
+    ///--- P5-Kit scaffolding stuff starts here. ---///
+
+    // @hmr:keep-all
+    import { globalOnDemandP5 } from '$lib/global-on-demand-p5.js';
+    globalOnDemandP5({ setup, draw }, 'p5-sketch');
+
+    let sketch;
+
+    let mouseMode = 'wander'; // 'control', 'follow'
+
+    let mouseX, maxMouseX;
+    let mouseY, maxMouseY;
 
     function handleMousemove(e) {
         if (mouseMode == 'follow') {
