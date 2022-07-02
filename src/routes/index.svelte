@@ -1,32 +1,94 @@
 <script>
     // @hmr:keep-all
-    import { globalOnDemandP5 } from '$lib/global-on-demand-p5.js'
-    globalOnDemandP5({setup, draw}, 'p5-sketch');
+    import { globalOnDemandP5 } from '$lib/global-on-demand-p5.js';
+    globalOnDemandP5({ setup, draw }, 'p5-sketch');
 
+    let sketch;
 
-    // Top level variables are preserved by Svelte.
-    let x;
+    let mouseMode = 'wander'; // 'control', 'follow'
+
+    let mouseX, maxMouseX;
+    let mouseY, maxMouseY;
+
+    let max_distance;
 
     function setup() {
-        createCanvas(500, 300);
-        x = x || width/2;
+        createCanvas(710, 400);
+        noStroke();
+        max_distance = dist(0, 0, width, height);
     }
 
     function draw() {
-        background(200);
-        x = (x + 1) % width;
-        line(x, 0, x, height);
+        background(0);
+        for (let i = 0; i <= width; i += 20) {
+            for (let j = 0; j <= height; j += 20) {
+            let size = dist(mouseX, mouseY, i, j);
+            size = (size / max_distance) * 66;
+            ellipse(i, j, size, size);
+            }
+        }
+    }
+
+    function handleMousemove(e) {
+        if (mouseMode == 'follow') {
+            const rect = sketch.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        }
+    };
+
+    function handleClick(e) {
+        if (e.ctrlKey) {
+            mouseMode = (mouseMode == 'follow' ? 'control' : 'follow');
+            handleMousemove(e);
+        }
+        if (e.altKey) {
+            mouseMode = 'wander';
+        }
+    }
+
+    function step(ts) {
+        if (mouseMode == 'wander') {
+            mouseX = (Math.cos(ts/1009)+1)/2 * maxMouseX;
+            mouseY = (Math.sin(ts/1549)+1)/2 * (maxMouseY-4);
+        }
+        requestAnimationFrame(step);
+    }
+
+    if (typeof window != 'undefined') {
+        requestAnimationFrame(step);
     }
 </script>
 
-<div class=flex-wrap>
+<svelte:body on:mousemove={handleMousemove}
+             on:click={handleClick} />
+
+
+<div class="flex-wrap">
     <main>
-        <div id=p5-sketch />
-        <p>Based on: </p>
+        <div id=p5-sketch
+             bind:this={sketch}
+             bind:clientWidth={maxMouseX}
+             bind:clientHeight={maxMouseY}
+        />
+        <p>Based on:</p>
+        <p>Mouse Mode: {mouseMode}</p>
+        <p>
+            <label>
+                mouseX
+                <input type="range" bind:value={mouseX} min="0" max={maxMouseX} step="10" />
+                {mouseX?.toFixed(2)}
+            </label>
+        </p>
+        <p>
+            <label>
+                mouseY
+                <input type="range" bind:value={mouseY} min="0" max={maxMouseY-4} step="10" />
+                {mouseY?.toFixed(2)}
+            </label>
+        </p>
     </main>
 </div>
-
-
 
 <style>
     :global(body) {
@@ -47,7 +109,6 @@
     }
 
     main p {
-        padding: 0 .4em;
+        padding: 0 0.4em;
     }
-
 </style>
