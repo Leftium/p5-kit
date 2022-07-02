@@ -78,22 +78,24 @@
              bind:clientWidth={maxMouseX}
              bind:clientHeight={maxMouseY}
         />
-        <p>Based on:</p>
-        <p>Mouse Mode: {mouseMode}</p>
-        <p>
-            <label>
-                mouseX
-                <input type="range" bind:value={mouseX} min="0" max={maxMouseX} step="10" />
-                {mouseX?.toFixed(2)}
-            </label>
-        </p>
-        <p>
-            <label>
-                mouseY
-                <input type="range" bind:value={mouseY} min="0" max={maxMouseY-4} step="10" />
-                {mouseY?.toFixed(2)}
-            </label>
-        </p>
+        <div class=panel>
+            <p>Based on:</p>
+            <p>Mouse Mode: {mouseMode}</p>
+            <p>
+                <label>
+                    mouseX
+                    <input type="range" bind:value={mouseX} min="0" max={maxMouseX} step="10" />
+                    {mouseX?.toFixed(2)}
+                </label>
+            </p>
+            <p>
+                <label>
+                    mouseY
+                    <input type="range" bind:value={mouseY} min="0" max={maxMouseY-4} step="10" />
+                    {mouseY?.toFixed(2)}
+                </label>
+            </p>
+        </div>
     </main>
 </div>
 
@@ -111,11 +113,8 @@
         place-items: center;
     }
 
-    main {
+    .panel {
         background-color: #fefefe;
-    }
-
-    main p {
-        padding: 0 0.4em;
+        padding: 0.4em;
     }
 </style>
