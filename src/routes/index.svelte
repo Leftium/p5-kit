@@ -19,4 +19,35 @@
     }
 </script>
 
-<div id=p5-sketch />
+<div class=flex-wrap>
+    <main>
+        <div id=p5-sketch />
+        <p>Based on: </p>
+    </main>
+</div>
+
+
+
+<style>
+    :global(body) {
+        margin: 0;
+        background-image: url(/img/wild_oliva.png);
+        font-family: sans-serif;
+    }
+
+    .flex-wrap {
+        height: 100vh;
+
+        display: grid;
+        place-items: center;
+    }
+
+    main {
+        background-color: #fefefe;
+    }
+
+    main p {
+        padding: 0 .4em;
+    }
+
+</style>
