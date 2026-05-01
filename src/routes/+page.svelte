@@ -77,7 +77,11 @@
 			bind:clientHeight={maxMouseY}
 		></div>
 		<div class="panel">
-			<p>Based on:</p>
+			<p>
+				Based on: <a href="https://archive.p5js.org/examples/math-distance-2d.html">
+					https://archive.p5js.org/examples/math-distance-2d.html
+				</a>
+			</p>
 			<p>Mouse Mode: {mouseMode}</p>
 			<p>
 				<label>
