@@ -1,5 +1,5 @@
 <script lang="ts">
-	let max_distance;
+	let max_distance: number;
 
 	function setup() {
 		createCanvas(710, 400);
