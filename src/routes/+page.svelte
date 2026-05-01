@@ -35,6 +35,9 @@
 	let mouseY = $state(0),
 		maxMouseY = $derived(clientHeight - 4);
 
+	let wanderX = $state(0),
+		wanderY = $state(0);
+
 	function handleMousemove(e: MouseEvent) {
 		if (mouseMode == 'follow') {
 			const rect = sketch.getBoundingClientRect();
@@ -52,12 +55,18 @@
 		mouseMode = 'control';
 	}
 
+	function lerp(v0: number, v1: number, t: number) {
+		return v0 * (1 - t) + v1 * t;
+	}
+
 	let t = 0;
 	function step() {
+		t += 10;
+		wanderX = ((Math.cos(t / 1009) + 1) / 2) * maxMouseX;
+		wanderY = ((Math.sin(t / 1549) + 1) / 2) * maxMouseY;
 		if (mouseMode == 'wander') {
-			t += 10;
-			mouseX = ((Math.cos(t / 1009) + 1) / 2) * maxMouseX;
-			mouseY = ((Math.sin(t / 1549) + 1) / 2) * maxMouseY;
+			mouseX = lerp(mouseX, wanderX, 0.1);
+			mouseY = lerp(mouseY, wanderY, 0.1);
 		}
 		requestAnimationFrame(step);
 	}
