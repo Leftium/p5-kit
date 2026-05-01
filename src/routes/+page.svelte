@@ -109,6 +109,11 @@
 					https://archive.p5js.org/examples/math-distance-2d.html
 				</a>
 			</p>
+			<p>
+				Source code: <a href="https://github.com/Leftium/p5-kit">
+					https://github.com/Leftium/p5-kit
+				</a>
+			</p>
 		</div>
 	</main>
 </div>
