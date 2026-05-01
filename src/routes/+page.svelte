@@ -47,7 +47,7 @@
 	}
 
 	function onclick(e: MouseEvent) {
-		mouseMode = mouseMode !== 'wander' ? 'wander' : 'follow';
+		mouseMode = mouseMode !== 'follow' ? 'follow' : 'wander';
 		handleMousemove(e);
 	}
 
