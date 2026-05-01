@@ -90,12 +90,6 @@
 		></div>
 		<div class="panel">
 			<p>
-				Based on: <a href="https://archive.p5js.org/examples/math-distance-2d.html">
-					https://archive.p5js.org/examples/math-distance-2d.html
-				</a>
-			</p>
-			<p>Mouse Mode: {mouseMode}</p>
-			<p>
 				<label>
 					mouseX
 					<input type="range" bind:value={mouseX} min="0" max={maxMouseX} step="10" {onmousedown} />
@@ -108,6 +102,12 @@
 					<input type="range" bind:value={mouseY} min="0" max={maxMouseY} step="10" {onmousedown} />
 					{Math.floor(mouseY)}
 				</label>
+			</p>
+			<p>Mouse Mode: {mouseMode}</p>
+			<p>
+				Based on: <a href="https://archive.p5js.org/examples/math-distance-2d.html">
+					https://archive.p5js.org/examples/math-distance-2d.html
+				</a>
 			</p>
 		</div>
 	</main>
