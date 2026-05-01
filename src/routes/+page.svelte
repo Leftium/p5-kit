@@ -28,10 +28,12 @@
 
 	let mouseMode = $state('wander'); // 'control', 'follow'
 
+	let clientHeight = $state(0);
+
 	let mouseX = $state(0),
 		maxMouseX = $state(0);
 	let mouseY = $state(0),
-		maxMouseY = $state(0);
+		maxMouseY = $derived(clientHeight - 4);
 
 	function handleMousemove(e: MouseEvent) {
 		if (mouseMode == 'follow') {
@@ -41,14 +43,13 @@
 		}
 	}
 
-	function handleClick(e: MouseEvent) {
-		if (e.ctrlKey) {
-			mouseMode = mouseMode == 'follow' ? 'control' : 'follow';
-			handleMousemove(e);
-		}
-		if (e.altKey) {
-			mouseMode = mouseMode == 'wander' ? 'control' : 'wander';
-		}
+	function onclick(e: MouseEvent) {
+		mouseMode = mouseMode !== 'wander' ? 'wander' : 'follow';
+		handleMousemove(e);
+	}
+
+	function onmousedown() {
+		mouseMode = 'control';
 	}
 
 	let t = 0;
@@ -56,7 +57,7 @@
 		if (mouseMode == 'wander') {
 			t += 10;
 			mouseX = ((Math.cos(t / 1009) + 1) / 2) * maxMouseX;
-			mouseY = ((Math.sin(t / 1549) + 1) / 2) * (maxMouseY - 4);
+			mouseY = ((Math.sin(t / 1549) + 1) / 2) * maxMouseY;
 		}
 		requestAnimationFrame(step);
 	}
@@ -66,7 +67,7 @@
 	}
 </script>
 
-<svelte:body on:mousemove={handleMousemove} on:click={handleClick} />
+<svelte:body on:mousemove={handleMousemove} />
 
 <div class="flex-wrap">
 	<main>
@@ -74,7 +75,9 @@
 			id="p5-sketch"
 			bind:this={sketch}
 			bind:clientWidth={maxMouseX}
-			bind:clientHeight={maxMouseY}
+			bind:clientHeight
+			{onclick}
+			role="none"
 		></div>
 		<div class="panel">
 			<p>
@@ -86,14 +89,14 @@
 			<p>
 				<label>
 					mouseX
-					<input type="range" bind:value={mouseX} min="0" max={maxMouseX} step="10" />
+					<input type="range" bind:value={mouseX} min="0" max={maxMouseX} step="10" {onmousedown} />
 					{mouseX?.toFixed(2)}
 				</label>
 			</p>
 			<p>
 				<label>
 					mouseY
-					<input type="range" bind:value={mouseY} min="0" max={maxMouseY - 4} step="10" />
+					<input type="range" bind:value={mouseY} min="0" max={maxMouseY} step="10" {onmousedown} />
 					{mouseY?.toFixed(2)}
 				</label>
 			</p>
