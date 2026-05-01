@@ -90,14 +90,14 @@
 				<label>
 					mouseX
 					<input type="range" bind:value={mouseX} min="0" max={maxMouseX} step="10" {onmousedown} />
-					{mouseX?.toFixed(2)}
+					{Math.floor(mouseX)}
 				</label>
 			</p>
 			<p>
 				<label>
 					mouseY
 					<input type="range" bind:value={mouseY} min="0" max={maxMouseY} step="10" {onmousedown} />
-					{mouseY?.toFixed(2)}
+					{Math.floor(mouseY)}
 				</label>
 			</p>
 		</div>
