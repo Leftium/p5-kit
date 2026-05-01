@@ -1,10 +1,10 @@
 import { onMount } from 'svelte';
 
 type P5Methods = Partial<{
-  setup: () => void;
-  draw: () => void;
-  // TODO: add other P5 methods here;
-}>
+	setup: () => void;
+	draw: () => void;
+	// TODO: add other P5 methods here;
+}>;
 
 declare global {
 	interface Window {
