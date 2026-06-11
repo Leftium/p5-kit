@@ -21,8 +21,7 @@
 	///--- P5-Kit scaffolding stuff starts here. ---///
 
 	// @hmr:keep-all
-	import { globalOnDemandP5 } from '$lib/global-on-demand-p5.js';
-	globalOnDemandP5({ setup, draw }, 'p5-sketch');
+	import { p5 } from '@sveltecraft/p5-svelte';
 
 	let sketch: HTMLDivElement;
 
@@ -83,6 +82,7 @@
 		<div
 			id="p5-sketch"
 			bind:this={sketch}
+			{@attach p5({ setup, draw })}
 			bind:clientWidth={maxMouseX}
 			bind:clientHeight
 			{onclick}
